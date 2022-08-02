@@ -5,7 +5,19 @@ export default function Quiz() {
   const{score,setScore,setQuizState}=useContext(QuizContext);
   const[optionChosen,setOptionChosen] = useState("")
   const [currentQuestion,setCurrentQuestion]=useState(0);
-   const finish = ()=>{
+  const [sec,setsec]=useState(0);
+  var timer;
+  useEffect(()=>{
+    timer=setInterval(() => {
+      setsec(sec+1);
+      if(sec === 59){
+        setCurrentQuestion(currentQuestion+1)
+      };
+
+    }, 1000);
+    
+  })
+  const finish = ()=>{
     if(Questions[currentQuestion].answer==optionChosen){
       setScore(score+1)
     }
@@ -13,6 +25,7 @@ export default function Quiz() {
    };
    console.log(Questions[1])
   const nextQuestion = ()=>{
+    setsec(0);
     if(Questions[currentQuestion].answer==optionChosen){
       setScore(score+1)
     }
@@ -20,6 +33,7 @@ export default function Quiz() {
   };
   
   const prevQuestion = ()=>{
+    setsec(0);
     setScore(score - 1);
     setCurrentQuestion(currentQuestion - 1);
   };
@@ -27,6 +41,7 @@ export default function Quiz() {
 
   return (
     <div className='Quiz'>
+      <h3 className='Timer'>Timer : {sec<10? "0"+sec:sec}</h3>
       <p>
         {""}
         Score {score}/{Questions.length}
@@ -48,7 +63,7 @@ export default function Quiz() {
           (<button onClick={nextQuestion}>Next</button>)
         }
         {
-          currentQuestion >=  Questions[2] ?(console.log(Questions[2]))
+          currentQuestion >=  currentQuestion[2] ?(console.log(Questions[2]))
           :(<button onClick={prevQuestion}>Back</button>) 
           
         }
