@@ -24,11 +24,13 @@ export default function Quiz() {
     setQuizState("end")
    };
    console.log(Questions[1])
+   
   const nextQuestion = ()=>{
     setsec(0);
     if(Questions[currentQuestion].answer==optionChosen){
       setScore(score+1)
     }
+   
     setCurrentQuestion(currentQuestion+1)
   };
   
@@ -48,13 +50,15 @@ export default function Quiz() {
       </p>
       <h3>{Questions[currentQuestion].prmpt}</h3>
       <div className='options'>
-        <button id='opt_btn1' onClick={()=> setOptionChosen("A") }>
+      {/* //for the correct option changes backgroud color to green
+      // and fr wrong changes background opption to red bu using the ternary operaor in className */}
+        <button id='opt_btn1' onClick={()=> setOptionChosen("A")  } className={ `${Questions[currentQuestion].answer==optionChosen? "correct":"wrong"}`} >
           {Questions[currentQuestion].optionA}</button>
-        <button id='opt_btn2' onClick={()=> setOptionChosen("B") }>
+        <button id='opt_btn2' onClick={()=> setOptionChosen("B") } className={ `${Questions[currentQuestion].answer==optionChosen? "correct":"wrong"}`}>
           {Questions[currentQuestion].optionB}</button>
-        <button id='opt_btn3' onClick={()=> setOptionChosen("C")}>
+        <button id='opt_btn3' onClick={()=> setOptionChosen("C")} className={ `${Questions[currentQuestion].answer==optionChosen? "correct":"wrong"}`}>
           {Questions[currentQuestion].optionC}</button>
-        <button id='opt_btn4' onClick={()=> setOptionChosen("D")}>
+        <button id='opt_btn4' onClick={()=> setOptionChosen("D")} className={ `${Questions[currentQuestion].answer==optionChosen? "correct":"wrong"}`}>
           {Questions[currentQuestion].optionD}</button>
       </div>
       <div className='prenex-btn'>
